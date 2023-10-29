@@ -4,7 +4,8 @@
 //palabraReservadaVar, palabraReservadaSalir fue la forma que se me ocurrio identificarlas
 
 //Pendiente 
-//TODO: DUDA: esta bien hacer asi la negacion de mi alfabeto??? con 1 car fuera basta para que matchee y desp acepta hasta un \n o \r
+/*TODO: DUDA: esta bien hacer asi la negacion de mi alfabeto??? 
+con 1 car fuera basta para que matchee y desp acepta hasta un \n o \r*/
  
 //TODO: NOTAS: hacer un top down: 
     cuantos tokens devuelvo a mano: 
