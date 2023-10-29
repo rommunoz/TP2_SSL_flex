@@ -1,6 +1,6 @@
     #include <ctype.h>
     #include <stdio.h>
-    #include <cstring.h>
+    #include <string.h>
     #include "tokens.h"
 
 operadorAsign =[+/*-]?
@@ -26,7 +26,7 @@ divIgual \/=
 palResVar var
 palResSalida salir
 nuevaLinea \n
-cadenaDesconocida {fueraDelAlfabeto}.*
+cadenaDesconocida {fueraDelAlfabeto}{-}[ \n\t].*
 idInvalido {identificador}{cadenaDesconocida}
 literalInvalido {numero}({letra}+|[.]({digito}*[.]+{digito}*)+)
 
@@ -40,15 +40,15 @@ literalInvalido {numero}({letra}+|[.]({digito}*[.]+{digito}*)+)
 
 {palResVar} {           return PR_VAR;}
 {palResSalida} {        return PR_SALIR;}
-{identificador} {       lex_buf = strdup(yytext); return IDENTIFICADOR;}
+{identificador} {       strdup(lex_buf, yytext); return IDENTIFICADOR;}
 \n {                    return NL;}
-{numero} {              lex_buf = strdup(yytext); return NUMERO;}
+{numero} {              strdup(lex_buf, yytext); return NUMERO;}
 {menosIgual} {          return OP_MENOS_IG;} 
 {masIgual} {            return OP_MAS_IG;}
 {porIgual} {            return OP_POR_IG;}
 {divIgual} {            return OP_DIV_IG;}
-{cadenaDesconocida} {   lex_buf = strdup(yytext); return CAD_DESCONOCIDA;}
-{idInvalido} {          lex_buf = strdup(yytext); return ID_INVALIDO;}
-{literalInvalido} {     lex_buf = strdup(yytext); return NUM_INVALIDO;}
+{cadenaDesconocida} {   strdup(lex_buf, yytext); return CAD_DESCONOCIDA;}
+{idInvalido} {          strdup(lex_buf, yytext); return ID_INVALIDO;}
+{literalInvalido} {     strdup(lex_buf, yytext); return NUM_INVALIDO;}
 
 %%
