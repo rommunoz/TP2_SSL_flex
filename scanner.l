@@ -1,7 +1,8 @@
-    include <ctype.h>
-    include <stdio.h>
+    #include <ctype.h>
+    #include <stdio.h>
+    #include <cstring.h>
+    #include "tokens.h"
 
-//puede servir
 operadorAsign =[+/*-]?
 operador {operadorArit}|{operadorAsign} 
 
@@ -14,21 +15,20 @@ letra [a-zA-z]
 letrasSinE [a-zA-z]{-}[eE]
 idVariable {letra}({letra}|{digito})*
 idFuncion a?(sin|cos|tan)|sqrt|log
-fueraDelAlfabeto [^0-9a-zA-Z.()=*+/-] //intento, pero creo que está mal
+fueraDelAlfabeto [^0-9a-zA-Z.()=*+/-]
 
-//tokens, fdt automatico, TODO: palabrasReservadas se usa ECHO?
 identificador {idVariable}|{idFuncion}
 numero {flotante}|{entero}
-menosIgual -= //se puede "+=" ?
+menosIgual -=
 masIgual \+=
 porIgual \*=
 divIgual \/=
-palResVar var 
+palResVar var
 palResSalida salir
 nuevaLinea \n
-cadenaDesconocida {fueraDelAlfabeto}.* //TODO:capaz sacar .Kleene esta bien hacer asi la negacion de mi alfabeto??? con 1 car fuera basta para que matchee y desp acepta hasta un \n o \r, tengo mi duda y es que reconocería a@+3 como un error todo junto
+cadenaDesconocida {fueraDelAlfabeto}.*
 idInvalido {identificador}{cadenaDesconocida}
-literalInvalido {numero}({letra}+|[.]({digito}*[.]+{digito}*)+)  // {numero}({letra}+|[.]{2,}) // [.]{2,} si serian dos puntos seguidos, yo le intercalé unos digitos optativos entre medio, porque si intercalo cualquier cosa me puede dar un char fuera de mi alfabeto
+literalInvalido {numero}({letra}+|[.]({digito}*[.]+{digito}*)+)
 
 %option header-file="scanner.h"
 %option outfile="scanner.c"
@@ -38,15 +38,17 @@ literalInvalido {numero}({letra}+|[.]({digito}*[.]+{digito}*)+)  // {numero}({le
 
 %%
 
-{palResVar} {           return PR_VAR;          }
-{palResSalida} {        return PR_SALIR;        }
-{identificador} {       return IDENTIFICADOR;   }
-\n {                    return NL;              }
-{numero} {              return NUMERO;          }
-{menosIgual} {          return OP_MENOS_IG;     } 
-{masIgual} {            return OP_MAS_IG;       }
-{porIgual} {            return OP_POR_IG;       }
-{divIgual} {            return OP_DIV_IG;       }
-{cadenaDesconocida} {   return CAD_DESCONOCIDA; }
-{idInvalido} {          return ID_INVALIDO;     }
-{literalInvalido} {     return NUM_INVALIDO;    }
+{palResVar} {           return PR_VAR;}
+{palResSalida} {        return PR_SALIR;}
+{identificador} {       lex_buf = strdup(yytext); return IDENTIFICADOR;}
+\n {                    return NL;}
+{numero} {              lex_buf = strdup(yytext); return NUMERO;}
+{menosIgual} {          return OP_MENOS_IG;} 
+{masIgual} {            return OP_MAS_IG;}
+{porIgual} {            return OP_POR_IG;}
+{divIgual} {            return OP_DIV_IG;}
+{cadenaDesconocida} {   lex_buf = strdup(yytext); return CAD_DESCONOCIDA;}
+{idInvalido} {          lex_buf = strdup(yytext); return ID_INVALIDO;}
+{literalInvalido} {     lex_buf = strdup(yytext); return NUM_INVALIDO;}
+
+%%
