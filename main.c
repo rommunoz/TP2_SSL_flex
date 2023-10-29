@@ -2,20 +2,22 @@
 #include <ctype.h>
 #include "scanner.h"
 #include "tokens.h"
+#define DIM_TOKENS 10
 
-char* vecNombres[DIM_TOKENS] = {"Fin de Texto", "Identificador", "Numero", 
-        "-=", "+=", "*=", "/=", "Palabra reservada var", "Palabra reservada salir",
-        "NL", "Cadena desconocida", "Nro invalido", "Identificador invalido"};
+char* token_names[DIM_TOKENS] = {"", "Identificador", "Numero", "-=", "+=", "*=", 
+                    "/=", "Palabra reservada var", "Palabra reservada salir", "NL"};
 
-void mostrarToken(int token){
-    if(token < DIM_TOKENS && yyleng < DIM_BUFF-1){
-        printf("Token: %s\t%s\n", vecNombres[token], lex_buf);
+void mostrarToken(enum token t){
+    if(t < DIM_TOKENS){
+        printf("Token: %s\tLexema: %s\n", token_names[t], yytext);
+    } else {
+        printf("Token: %d\tLexema: %c\n", yytext[0], yytext[0]); //1ra idea para las por defecto, pero hay que revisarlo o sacarlo
     }
 }
 
 int main(void){
-    while(token != FDT){
-        token = yylex();
-        mostrarToken(token);
+    enum token t;
+    while((t = yylex()) != FDT){
+        mostrarToken(t);
     }
 }

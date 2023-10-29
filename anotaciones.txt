@@ -4,13 +4,14 @@
 //palabraReservadaVar, palabraReservadaSalir fue la forma que se me ocurrio identificarlas
 
 //Pendiente 
-/*TODO: DUDA: esta bien hacer asi la negacion de mi alfabeto??? 
-con 1 car fuera basta para que matchee y desp acepta hasta un \n o \r */
- 
+//TODO: DUDA: esta bien hacer asi la negacion de mi alfabeto??? con 1 car fuera basta para que matchee y desp acepta hasta un \n o \r */
+//Decision final: que las reglas errores o no mostrables solo hagan un printf especifico y se morfen el token, (no lo devuelven y no existiría en mi enum)
+    descartadisimo: 1- un flag en tokens.h y las reglas me lo setean si es mostrable, en main evalúo; y 2- buffer auxiliar mio donde copio el yytext y muestro esa variable siempre en el main. Pedorrisimo, ineficiente.
+
 //TODO: NOTAS: hacer un top down: 
     cuantos tokens devuelvo a mano: 
         identificador y su lexema, 
-        numero y su literal (se arma un float con o sin exponente y enteros )                // despues se lo implementa como double pero no me interesa)
+        numero y su literal (se arma un float con o sin exponente y enteros )                // despues se lo implementa como double pero no me interesa todavia
         palabraReservadas, (2)
         CADENA INVALIDA y su lexema
         NUMERO INVALIDO y su lexema

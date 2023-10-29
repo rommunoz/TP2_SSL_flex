@@ -543,10 +543,10 @@ int yy_flex_debug = 0;
 char *yytext;
 #line 1 "scanner.l"
 #line 2 "scanner.l"
-    #include <ctype.h>
-    #include <stdio.h>
-    #include <string.h>
-    #include "tokens.h"
+#include <stdio.h>
+#include <string.h>
+#include "tokens.h"
+#line 549 "scanner.c"
 #define YY_NO_INPUT 1
 #line 551 "scanner.c"
 
@@ -763,7 +763,7 @@ YY_DECL
 		}
 
 	{
-#line 40 "scanner.l"
+#line 34 "scanner.l"
 
 
 #line 769 "scanner.c"
@@ -835,68 +835,68 @@ do_action:	/* This label is used only to access EOF actions. */
 
 case 1:
 YY_RULE_SETUP
-#line 42 "scanner.l"
-{           return PR_VAR;}
+#line 36 "scanner.l"
+{                                   return PR_VAR;}
 	YY_BREAK
 case 2:
 YY_RULE_SETUP
-#line 43 "scanner.l"
-{        return PR_SALIR;}
+#line 37 "scanner.l"
+{                                 return PR_SALIR;}
 	YY_BREAK
 case 3:
 YY_RULE_SETUP
-#line 44 "scanner.l"
-{       strcpy(lex_buf, yytext); return IDENTIFICADOR;}
+#line 38 "scanner.l"
+{                       return IDENTIFICADOR;}
 	YY_BREAK
 case 4:
 /* rule 4 can match eol */
 YY_RULE_SETUP
-#line 45 "scanner.l"
-{                    return NL;}
+#line 39 "scanner.l"
+{                                    strcpy(yytext, ""); return NL;}
 	YY_BREAK
 case 5:
 YY_RULE_SETUP
-#line 46 "scanner.l"
-{              strcpy(lex_buf, yytext); return NUMERO;}
+#line 40 "scanner.l"
+{                              return NUMERO;}
 	YY_BREAK
 case 6:
 YY_RULE_SETUP
-#line 47 "scanner.l"
-{          return OP_MENOS_IG;} 
+#line 41 "scanner.l"
+{                          strcpy(yytext, ""); return OP_MENOS_IG;} 
 	YY_BREAK
 case 7:
 YY_RULE_SETUP
-#line 48 "scanner.l"
-{            return OP_MAS_IG;}
+#line 42 "scanner.l"
+{                            strcpy(yytext, ""); return OP_MAS_IG;}
 	YY_BREAK
 case 8:
 YY_RULE_SETUP
-#line 49 "scanner.l"
-{            return OP_POR_IG;}
+#line 43 "scanner.l"
+{                            strcpy(yytext, ""); return OP_POR_IG;}
 	YY_BREAK
 case 9:
 YY_RULE_SETUP
-#line 50 "scanner.l"
-{            return OP_DIV_IG;}
+#line 44 "scanner.l"
+{                            strcpy(yytext, ""); return OP_DIV_IG;}
 	YY_BREAK
 case 10:
 YY_RULE_SETUP
-#line 51 "scanner.l"
-{   strcpy(lex_buf, yytext); return CAD_DESCONOCIDA;}
+#line 45 "scanner.l"
+{                   printf("Error: Cadena desconocida: %s", yytext);}
 	YY_BREAK
 case 11:
 YY_RULE_SETUP
-#line 52 "scanner.l"
-{          strcpy(lex_buf, yytext); return ID_INVALIDO;}
+#line 46 "scanner.l"
+{   printf("Error: Identificador invalido: %s", yytext);}
 	YY_BREAK
 case 12:
 YY_RULE_SETUP
-#line 53 "scanner.l"
-{     strcpy(lex_buf, yytext); return NUM_INVALIDO;}
+#line 47 "scanner.l"
+{                     printf("Error: Literal invalido: %s", yytext);}
 	YY_BREAK
 case 13:
 YY_RULE_SETUP
-#line 55 "scanner.l"
+#line 49 "scanner.l"
 ECHO;
 	YY_BREAK
 #line 902 "scanner.c"
@@ -1875,5 +1875,5 @@ void yyfree (void * ptr )
 
 #define YYTABLES_NAME "yytables"
 
-#line 55 "scanner.l"
+#line 49 "scanner.l"
 
