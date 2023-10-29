@@ -1,0 +1,24 @@
+//los parentesis dejo que se manden como un token mas por ser caracteres
+//operadores que son 1 char dejo que vayan solos como caracteres
+//No necesito devolver espacios, por ahora a nivel lexico
+//palabraReservadaVar, palabraReservadaSalir fue la forma que se me ocurrio identificarlas
+
+//Pendiente 
+//TODO: DUDA: esta bien hacer asi la negacion de mi alfabeto??? con 1 car fuera basta para que matchee y desp acepta hasta un \n o \r
+ 
+//TODO: NOTAS: hacer un top down: 
+    cuantos tokens devuelvo a mano: 
+        identificador y su lexema, 
+        numero y su literal (se arma un float con o sin exponente y enteros)                // despues se lo implementa como double pero no me interesa)
+        palabraReservadas, (2)
+        CADENA INVALIDA y su lexema
+        NUMERO INVALIDO y su lexema
+        ID INVALIDO y su lexema
+        operadoresde +1 caracter (4)
+        \n //RETORNO token NL 
+    y cuantos automatico:
+        operadores de 1 caracter dejo que vayan solos (5)
+        EOF (1)
+        caracteres sueltos 
+        // espacios son ignorados en main o en el mismo yylex
+        caracterPuntuacion [{()}] //(2) los parentesis pertenecen a mi alfabeto
