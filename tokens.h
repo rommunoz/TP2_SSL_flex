@@ -2,11 +2,13 @@
 #define tokens_h
 #define e  2.7182818284
 #define pi 3.1415926536
+#define DIM_TOKENS 12
 
-enum token {FDT = 0,
-            IDENTIFICADOR = 100 , NUMERO, CARACTER, //OP_MENOS, OP_MAS, OP_MULTIP, OP_DIV, OP_EXP, 
-            ERR_COMUN = 200, NUM_INVALIDO, ID_INVALIDO};
+enum token {FDT = 0, IDENTIFICADOR, NUMERO, OP_MENOS_IG, OP_MAS_IG, OP_POR_IG, OP_DIV_IG,
+            PR_VAR, PR_SALIR, NL, CAD_DESCONOCIDA, NUM_INVALIDO, ID_INVALIDO};
 
-float nro = 00009.E-3;
+//char lex_buff[512];
+
+char *vecNombres[DIM_TOKENS];
 
 #endif
