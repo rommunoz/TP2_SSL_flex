@@ -15,7 +15,7 @@ letra [a-zA-z]
 letrasSinE [a-zA-z]{-}[eE]
 idVariable {letra}({letra}|{digito})*
 idFuncion a?(sin|cos|tan)|sqrt|log
-fueraDelAlfabeto [^0-9a-zA-Z.()=*+/-]
+fueraDelAlfabeto [^0-9a-zA-Z.()=*+/-]{-}[ \n\t]
 
 identificador {idVariable}|{idFuncion}
 numero {flotante}|{entero}
@@ -26,7 +26,7 @@ divIgual \/=
 palResVar var
 palResSalida salir
 nuevaLinea \n
-cadenaDesconocida {fueraDelAlfabeto}{-}[ \n\t].*
+cadenaDesconocida {fueraDelAlfabeto}.*
 idInvalido {identificador}{cadenaDesconocida}
 literalInvalido {numero}({letra}+|[.]({digito}*[.]+{digito}*)+)
 
@@ -40,15 +40,15 @@ literalInvalido {numero}({letra}+|[.]({digito}*[.]+{digito}*)+)
 
 {palResVar} {           return PR_VAR;}
 {palResSalida} {        return PR_SALIR;}
-{identificador} {       strdup(lex_buf, yytext); return IDENTIFICADOR;}
+{identificador} {       strcpy(lex_buf, yytext); return IDENTIFICADOR;}
 \n {                    return NL;}
-{numero} {              strdup(lex_buf, yytext); return NUMERO;}
+{numero} {              strcpy(lex_buf, yytext); return NUMERO;}
 {menosIgual} {          return OP_MENOS_IG;} 
 {masIgual} {            return OP_MAS_IG;}
 {porIgual} {            return OP_POR_IG;}
 {divIgual} {            return OP_DIV_IG;}
-{cadenaDesconocida} {   strdup(lex_buf, yytext); return CAD_DESCONOCIDA;}
-{idInvalido} {          strdup(lex_buf, yytext); return ID_INVALIDO;}
-{literalInvalido} {     strdup(lex_buf, yytext); return NUM_INVALIDO;}
+{cadenaDesconocida} {   strcpy(lex_buf, yytext); return CAD_DESCONOCIDA;}
+{idInvalido} {          strcpy(lex_buf, yytext); return ID_INVALIDO;}
+{literalInvalido} {     strcpy(lex_buf, yytext); return NUM_INVALIDO;}
 
 %%
