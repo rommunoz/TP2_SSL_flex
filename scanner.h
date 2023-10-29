@@ -203,6 +203,9 @@ void yyfree ( void *  );
 
 /* Begin user sect3 */
 
+#define yywrap() (/*CONSTCOND*/1)
+#define YY_SKIP_YYWRAP
+
 extern int yylineno;
 
 extern char *yytext;
@@ -466,9 +469,9 @@ extern int yylex (void);
 #undef yyTABLES_NAME
 #endif
 
-#line 49 "scanner.l"
+#line 48 "scanner.l"
 
 
-#line 472 "scanner.h"
+#line 475 "scanner.h"
 #undef yyIN_HEADER
 #endif /* yyHEADER_H */
