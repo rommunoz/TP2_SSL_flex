@@ -10,7 +10,7 @@ con 1 car fuera basta para que matchee y desp acepta hasta un \n o \r */
 //TODO: NOTAS: hacer un top down: 
     cuantos tokens devuelvo a mano: 
         identificador y su lexema, 
-        numero y su literal (se arma un float con o sin exponente y enteros)                // despues se lo implementa como double pero no me interesa)
+        numero y su literal (se arma un float con o sin exponente y enteros )                // despues se lo implementa como double pero no me interesa)
         palabraReservadas, (2)
         CADENA INVALIDA y su lexema
         NUMERO INVALIDO y su lexema
