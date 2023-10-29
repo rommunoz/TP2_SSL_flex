@@ -17,8 +17,8 @@ fueraDelAlfabeto [^ \n\t]{-}[0-9a-zA-Z.()^=*+/-]
 
 identificador {idVariable}|{idFuncion}
 numero {flotante}|{entero}
-cadenaDesconocida {fueraDelAlfabeto}.*
-realInvalido \.*{flotante}({exponenteInvalido}|[.])({numero}|{letra})*
+cadenaDesconocida {fueraDelAlfabeto}[^ \n\t]*
+realInvalido \.*{flotante}({exponenteInvalido}|[.])({numero}|{letra}|\.)*
 constanteInvalida {entero}{exponenteInvalido}({letra}|{entero})*
 
 %option header-file="scanner.h"
@@ -26,7 +26,6 @@ constanteInvalida {entero}{exponenteInvalido}({letra}|{entero})*
 %option yylineno
 %option noinput 
 %option nounput
-%option noyywrap
 
 %%
 
@@ -39,10 +38,11 @@ salir {                                 return FDT;}
 \+= {                                   return OP_MAS_IG;}
 \*= {                                   return OP_POR_IG;}
 \/= {                                   return OP_DIV_IG;}
-{cadenaDesconocida} {                   printf("Error: Cadena desconocida: '%s'\n", yytext);}
-{identificador}{cadenaDesconocida}  {   printf("Error: Identificador invalido: '%s'\n", yytext);}
-{constanteInvalida} {                   printf("Error: Constante invalida: '%s'\n", yytext);}
-{realInvalido} {                        printf("Error: Real invalido: '%s'\n", yytext);}
+{identificador}{cadenaDesconocida}  {   printf("Error lexico: Identificador invalido: '%s'\n", yytext);}
+{constanteInvalida} {                   printf("Error lexico: Constante invalida: '%s'\n", yytext);}
+\.({numero}|.)*                         |
+{realInvalido} {                        printf("Error lexico: Real invalido: '%s'\n", yytext);}
+{cadenaDesconocida} {                   printf("Error lexico: Cadena desconocida: '%s'\n", yytext);}
 [=^+/*()-] {                            return yytext[0];}
 .|\n                                    //null;
 %%
