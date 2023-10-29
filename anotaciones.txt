@@ -23,3 +23,7 @@ con 1 car fuera basta para que matchee y desp acepta hasta un \n o \r */
         caracteres sueltos 
         // espacios son ignorados en main o en el mismo yylex
         caracterPuntuacion [{()}] //(2) los parentesis pertenecen a mi alfabeto
+
+//no uso pero tal vez despues:
+operadorAsign =[+/*-]?
+operador {operadorArit}|{operadorAsign} 
