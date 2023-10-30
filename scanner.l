@@ -26,13 +26,14 @@ constanteInvalida {entero}{exponenteInvalido}({letra}|{entero})*
 %option yylineno
 %option noinput 
 %option nounput
+%option debug
 
 %%
 
 var {                                   return PR_VAR;}
 salir {                                 return FDT;}
 {identificador} {                       return IDENTIFICADOR;}
-\n {                                    strcpy(yytext, "NL"); return NL;}
+\n {                                    return NL;}
 {numero} {                              return NUMERO;}
 -=  {                                   return OP_MENOS_IG;} 
 \+= {                                   return OP_MAS_IG;}
@@ -45,4 +46,8 @@ salir {                                 return FDT;}
 {cadenaDesconocida} {                   printf("Error lexico: Cadena desconocida: '%s'\n", yytext);}
 [=^+/*()-] {                            return yytext[0];}
 .|\n                                    //null;
+
 %%
+int yywrap(){
+	return 1;
+}
