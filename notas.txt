@@ -1,0 +1,13 @@
+//sin -lfl
+//en un cmd.exe, en PoweShell no anda la redireccion
+
+1
+flex scanner.l
+
+2
+gcc -Wall -D_GNU_SOURCE -std=c17 -pedantic-errors scanner.c main.c -o scantest
+
+3 //3 opciones
+./scantest <entrada.txt >salidaPrueba.txt
+./scantest <entrada.txt
+./scantest >salidaPrueba.txt
