@@ -6,7 +6,6 @@
             "command": "C:\\msys64\\ucrt64\\bin\\gcc.exe",
             "args": [
                 "-fdiagnostics-color=always",
-                "<entrada.txt",
                 "-g",
                 "scanner.c",
                 "${file}",
@@ -23,7 +22,7 @@
                 "kind": "build",
                 "isDefault": true
             },
-            "detail": "Tarea generada por el depurador."
+            "detail": "TP2 Scanner"
         }
     ],
     "version": "2.0.0"

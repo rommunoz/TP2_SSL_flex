@@ -26,7 +26,7 @@ constanteInvalida {entero}{exponenteInvalido}({letra}|{entero})*
 %option yylineno
 %option noinput 
 %option nounput
-%option debug
+    //%option debug
 
 %%
 
