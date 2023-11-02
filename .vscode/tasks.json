@@ -7,6 +7,10 @@
             "args": [
                 "-fdiagnostics-color=always",
                 "-g",
+                "-Wall",
+                "-D_GNU_SOURCE",
+                "-std=c17",
+                "-pedantic-errors",
                 "scanner.c",
                 "${file}",
                 "-o",

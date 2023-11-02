@@ -3,29 +3,29 @@
 #include <string.h>
 #include "tokens.h"
 %}
-
-entero                              [-]?[0-9]+
-exponente                           [eE]{entero}
-flotante                            [-]?([0-9]+([.][0-9]*)?|[.][0-9]+){exponente}?
+                      
+exponente                           [-]?[eE][0-9]+ 
+flotante                            ([0-9]+([.][0-9]*)?|[.][0-9]+){exponente}?
 
 letra                               [a-zA-Z]
 letrasSinE                          [a-zA-Z]{-}[eE]
 exponenteInvalido                   {letrasSinE}|{letra}{letra}
 idVariable                          {letra}({letra}|[0-9])*
 idFuncion                           a?(sin|cos|tan)|sqrt|log
-fueraDelAlfabeto                    [^ \n\t]{-}[0-9a-zA-Z.()^=*+/-]
+fueraDelAlfabeto                    [[:punct:]]{-}[0-9a-zA-Z.()^=*+/-]
 
 identificador                       {idVariable}|{idFuncion}
-numero                              {flotante}|{entero}
-cadenaDesconocida                   {fueraDelAlfabeto}[^ \n\t]*
+numero                              {flotante}|[0-9]+
+cadenaDesconocida                   {fueraDelAlfabeto}+
 realInvalido                        \.*{flotante}({exponenteInvalido}|[.])({numero}|{letra}|\.)*
-constanteInvalida                   {entero}{exponenteInvalido}({letra}|{entero})*
+constanteInvalida                   [0-9]+{exponenteInvalido}({letra}|[0-9]+)*
 
 %option header-file="scanner.h"
 %option outfile="scanner.c"
 %option yylineno
 %option noinput 
 %option nounput
+    //%option noyywrap
     //%option debug
 
 %%
@@ -41,13 +41,10 @@ salir                               return FDT;
 \/=                                 return OP_DIV_IG;
 {identificador}{cadenaDesconocida}  printf("Error lexico: Identificador invalido: '%s'\n", yytext);
 {constanteInvalida}                 printf("Error lexico: Constante invalida: '%s'\n", yytext);
-\.({numero}|[^ \n\t])*              |
+\.({numero}|[[:punct:]])*           |
 {realInvalido}                      printf("Error lexico: Real invalido: '%s'\n", yytext);
 {cadenaDesconocida}                 printf("Error lexico: Cadena desconocida: '%s'\n", yytext);
 [=^+/*()-]                          return yytext[0];
 .|\n                                //null;
 
 %%
-int yywrap(){ //para poder correrlo en windows sin -lfl
-	return 1;
-}
