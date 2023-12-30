@@ -1,20 +1,20 @@
 {
+    "version": "2.0.0",
     "tasks": [
         {
             "type": "cppbuild",
-            "label": "C/C++: gcc.exe compilar archivo activo",
+            "label": "C/C++: gcc compilar archivo activo",
             "command": "C:\\msys64\\ucrt64\\bin\\gcc.exe",
             "args": [
                 "-fdiagnostics-color=always",
                 "-g",
                 "-Wall",
-                "-D_GNU_SOURCE",
-                "-std=c17",
+                "-std=c2x",
                 "-pedantic-errors",
-                "scanner.c",
-                "${file}",
+                "-Wno-switch",
+                "${fileDirname}${pathSeparator}*.c",
                 "-o",
-                "${fileDirname}\\scantest.exe"
+                "${fileDirname}/${workspaceFolderBasename}"
             ],
             "options": {
                 "cwd": "${fileDirname}"
@@ -26,8 +26,7 @@
                 "kind": "build",
                 "isDefault": true
             },
-            "detail": "TP2 Scanner"
+            "detail": "compilador-: /usr/bin/gcc"
         }
-    ],
-    "version": "2.0.0"
+    ]
 }

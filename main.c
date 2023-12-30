@@ -1,19 +1,21 @@
 #include <stdio.h>
-#include <ctype.h>
-#include "scanner.h"
 #include "tokens.h"
-#define DIM_TOKENS 3
+#include "scanner.h"
+#define DIM_TOKENS 6
 
 //el resto son caracteres o par de caracteres
-char* token_names[DIM_TOKENS] = {"Fin de Archivo", "Identificador", "Numero"};
+char* token_names[DIM_TOKENS] = {"Fin de Archivo", "var", "salir", "NL", "Identificador", "Numero"};
 
 void mostrarToken(enum token t){
-    if(t == NL){
-        printf("Token: 'NL'\t\n");
-    } else if (t < DIM_TOKENS && t <= NUMERO){
-        printf("Token: %s\tLexema: %s\n", token_names[t], yytext);
+    if (t < DIM_TOKENS){
+        printf("Token: %s", token_names[t]);
+        if (t >= IDENTIFICADOR){
+            printf("\tlexema: %s\n", yytext);
+        } else {
+            printf("\n");
+        }
     } else {
-        printf("Token: '%s'\t\n", yytext);
+        printf("Token: '%s'\n", yytext);
     }
 }
 
