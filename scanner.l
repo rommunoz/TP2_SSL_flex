@@ -4,12 +4,10 @@
 #include "tokens.h"
 %}
                       
-exponente           [eE][-]?[0-9]+
-flotante            ([0-9]+([.][0-9]*)|[.][0-9]+){exponente}?
+flotante            ([0-9]+([.][0-9]*)|[.][0-9]+)
 letra               [a-zA-Z]
-exponenteInvalido   [a-zA-Z]{-}[eE]|{letra}{letra}
 fueraDelAlfabeto    [[:punct:]]{-}[0-9a-zA-Z.()^=*+/-]
-realInvalido        \.*{flotante}({exponenteInvalido}|[.])[a-zA-Z0-9.]*
+realInvalido        \.*{flotante}[a-zA-Z.][a-zA-Z0-9.]*
 idInvalido          {letra}[a-zA-Z0-9]*{fueraDelAlfabeto}.*
 
 %option header-file="scanner.h"
