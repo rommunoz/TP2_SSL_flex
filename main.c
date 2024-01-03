@@ -4,7 +4,7 @@
 #define DIM_TOKENS 6
 
 //el resto son caracteres o par de caracteres
-char* token_names[DIM_TOKENS] = {"Fin de Archivo", "var", "salir", "NL", "Identificador", "Numero"};
+char* token_names[DIM_TOKENS] = {"Fin de Archivo", "var", "salir", "'NL'", "Identificador", "Numero"};
 
 void mostrarToken(enum token t){
     if (t < DIM_TOKENS){
